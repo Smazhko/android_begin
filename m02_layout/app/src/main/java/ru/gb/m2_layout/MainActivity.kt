@@ -1,5 +1,6 @@
 package ru.gb.m2_layout
 
+import android.content.res.Resources
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -17,5 +18,6 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val resources:Resources = this.resources
     }
 }
