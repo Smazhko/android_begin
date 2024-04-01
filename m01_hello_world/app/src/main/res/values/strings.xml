@@ -1,0 +1,9 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Подсчёт мест</string>
+    <string name="txt_remained">Осталось мест</string>
+    <string name="txt_free">Все места свободны</string>
+    <string name="txt_full">Автобус переполнен, все места заняты!</string>
+    <string name="txt_count_of_passengers">Количество пассажиров</string>
+    <string name="btn_reset">Сбросить</string>
+    <string name="capacity">Вместимость автобуса </string>
+</resources>
