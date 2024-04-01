@@ -22,6 +22,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <ru.gb.m2_layout.SocialPostView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ru.gb.m2_layout.SocialPostView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
