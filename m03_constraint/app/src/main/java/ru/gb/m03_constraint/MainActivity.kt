@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        binding.imgAlbum.setImageResource(R.drawable.atb)
         binding.txtSinger.text = "ATB"
         binding.txtSong.text = "Feel Alive (Airplay Mix)"
 

@@ -14,7 +14,7 @@
         android:id="@+id/imgAlbum"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/atb"
+        android:src="@android:color/background_light"
         android:layout_margin="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
