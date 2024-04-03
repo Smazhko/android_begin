@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/atb_blur"
+    android:backgroundTintMode="multiply"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:id="@+id/imgAlbum"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/atb"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3"
+        android:contentDescription="@string/album_photo" />
+
+    <ImageButton
+        android:id="@+id/imdBtnBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="24dp"
+        android:background="@null"
+        android:baselineAlignBottom="true"
+        android:contentDescription="@string/previous_button"
+        android:src="@drawable/skip_previous_40"
+        app:layout_constraintBottom_toBottomOf="@id/imgBtnPlay"
+        app:layout_constraintEnd_toStartOf="@id/imgBtnPlay"
+        app:layout_constraintTop_toTopOf="@id/imgBtnPlay" />
+
+    <ImageButton
+        android:id="@+id/imgBtnPlay"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@null"
+        android:contentDescription="@string/play_button"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/play_circle_80"
+        app:layout_constraintEnd_toEndOf="@id/imgAlbum"
+        app:layout_constraintStart_toStartOf="@id/imgAlbum"
+        app:layout_constraintTop_toBottomOf="@id/imgAlbum" />
+
+    <ImageButton
+        android:id="@+id/imgBtnForward"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="24dp"
+        android:background="@null"
+        android:contentDescription="@string/next_button"
+        android:src="@drawable/skip_next_40"
+        app:layout_constraintBottom_toBottomOf="@id/imgBtnPlay"
+        app:layout_constraintStart_toEndOf="@id/imgBtnPlay"
+        app:layout_constraintTop_toTopOf="@id/imgBtnPlay" />
+
+    <TextView
+        android:id="@+id/txtSinger"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgBtnPlay"
+        app:layout_constraintBottom_toTopOf="@id/txtSong"
+        tools:text="@tools:sample/lorem/random"
+        android:ellipsize="end"
+        android:lines="1"
+        />
+
+    <TextView
+        android:id="@+id/txtSong"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:paddingHorizontal="16dp"
+        android:text="SONG"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSinger"
+        tools:text="@tools:sample/lorem/random"
+        android:ellipsize="end"
+        android:lines="1"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

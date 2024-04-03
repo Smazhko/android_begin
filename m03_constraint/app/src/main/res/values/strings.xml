@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">m03_constraint</string>
+    <string name="play_button">Play Button</string>
+    <string name="previous_button">previous button</string>
+    <string name="next_button">next button</string>
+    <string name="album_photo">Album photo</string>
+</resources>
