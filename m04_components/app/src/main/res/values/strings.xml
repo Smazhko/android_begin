@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">m04_components</string>
+    <string name="notify_authorization">Об авторизации на устройстве</string>
+    <string name="notify_news">О новинках и предложениях</string>
+    <string name="enter_name">Имя</string>
+    <string name="male">М</string>
+    <string name="female">Ж</string>
+    <string name="gender">Пол</string>
+    <string name="avatar">avatar</string>
+    <string name="phone_number">Телефон</string>
+    <string name="get_notification">Получать уведомления</string>
+    <string name="points_count">50/100</string>
+    <string name="save">Сохранить</string>
+    <string name="info_saved">Данные сохранены</string>
+    <string name="points">Баллы</string>
+</resources>
