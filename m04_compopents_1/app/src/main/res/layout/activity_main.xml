@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="32dp"
+    tools:context=".MainActivity">
+
+
+    <RadioGroup
+        android:id="@+id/rgroup1"
+        android:layout_width="wrap_content"
+        android:layout_height="146dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <RadioButton
+            android:id="@+id/rb1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="option 1"
+            />
+
+        <RadioButton
+            android:id="@+id/rb2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="option 2"
+            />
+
+        <RadioButton
+            android:id="@+id/rb3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="option 3"
+            />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnReset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RESET"
+        app:layout_constraintTop_toBottomOf="@id/rgroup1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnReset">
+
+        <EditText
+            android:id="@+id/edit_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="login"
+            android:inputType="textEmailAddress" />
+        <!-- android:inputType="textEmailAddress" даст определенный тип клавиатуры для ввода текста-->
+        <!-- tools:ignore="SpeakableTextPresentCheck" непонятно -->
+
+        <EditText
+            android:id="@+id/edit_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="password"
+            android:inputType="numberPassword" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="LOGIN" />
+
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtInputLayoutEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        android:layout_marginTop="32dp"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        >
+<!--  иконка, которая будет после текста      app:endIconMode="clear_text"-->
+<!--  можно ли будет выводить сообщ-е об ошибках      app:errorEnabled="true"-->
+<!--  начальное состояние - пустой, а значит некорректный email      app:errorEnabled="true"-->
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtInputEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Введите Ваш e-mail"
+            android:digits="123456+"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnChangeTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Сменить тему"
+        app:layout_constraintTop_toBottomOf="@id/txtInputLayoutEmail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/play_circle_fill0_wght400_grad0_opsz24"
+        app:layout_constraintTop_toBottomOf="@id/btnChangeTheme"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:tint="@color/design_default_color_error"
+        />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:scaleType="fitCenter"
+        app:tint="@color/design_default_color_error"
+        android:background="@null"
+
+        app:srcCompat="@drawable/play_circle_fill0_wght400_grad0_opsz24"
+        app:layout_constraintStart_toEndOf="@id/imageView"
+        app:layout_constraintTop_toTopOf="@id/imageView"
+        />
+    
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/imageView"
+        app:layout_constraintStart_toEndOf="@id/imageButton"
+        android:indeterminate="false"
+        android:progress="65"
+
+        app:indicatorColor="@color/design_default_color_primary"
+        app:trackColor="@color/design_default_color_secondary"
+        app:trackCornerRadius="@dimen/track_corner_radius"
+        app:trackThickness="@dimen/track_thickness"
+        />
+<!--    С помощью тега android:progress можно установить значение прогресса от 0 до 100.-->
+<!--    Неопределённый прогресс, то есть без фиксированного значения,-->
+<!--    отображается в виде бегущей полосы и устанавливается путём выставления-->
+<!--    значения “true” - android:indeterminate-->
+
+<!--    app:indicatorColor — устанавливает значение цвета для полосы заполнения-->
+<!--    прогресса. Принимает значения в формате HEX (#rrggbb) или в виде ссылки на-->
+<!--    ресурс с цветом.-->
+<!--    -->
+<!--    app:trackColor — устанавливает значение цвета для фона. Принимает-->
+<!--    значения в формате HEX (#rrggbb) или в виде ссылки на ресурс с цветом.-->
+<!--    -->
+<!--    app:trackThickness — устанавливает ширину полосы прогресса.-->
+<!--    -->
+<!--    app:trackCornerRadisus — устанавливает величину закруглений краёв для-->
+<!--    полосы прогресса.-->
+
+<!--    Для значений ширины и закруглений полосы прогресса используется-->
+<!--    конструкция @dimen/. -->
+<!--    Этот тип ресурса обычно обозначается именем dimens.xml в папке res/values и-->
+<!--    описывается в XML-файле в следующем формате:-->
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progress_circular"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:progress="35"
+        app:indicatorColor="@color/indicator_color"
+        app:trackColor="@color/track_color"
+        app:trackCornerRadius="@dimen/track_corner_radius"
+        app:trackThickness="@dimen/track_thickness"
+        app:layout_constraintTop_toBottomOf="@id/progress"
+        app:layout_constraintEnd_toEndOf="@id/progress"
+        android:indeterminate="true"
+        tools:ignore="MissingConstraints"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

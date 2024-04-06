@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="myButtonStyle" parent="ShapeAppearanceOverlay.Material3.Button">
+        <item name="backgroundColor">@color/light_blue</item>
+        <item name="textAppearanceButton">@style/btn_text</item>
+        <item name="borderRoundPercent">30</item>
+    </style>
+
+    <style name="btn_text" parent="normal_text">
+        <item name="android:textAllCaps">false</item>
+        <item name="color">@color/ivory</item>
+    </style>
+
+    <style name="myOutlineBox">
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="boxCornerRadiusTopStart">10dp</item>
+        <item name="boxCornerRadiusTopEnd">10dp</item>
+        <item name="boxCornerRadiusBottomStart">10dp</item>
+        <item name="boxCornerRadiusBottomEnd">10dp</item>
+        <item name="colorControlNormal">@color/blue</item>
+        <item name="boxStrokeColor">@color/blue</item>
+        <item name="boxStrokeWidth">3dp</item>
+    </style>
+
+
+    <style name="myOutlineBox.phone">
+        <item name="boxBackgroundColor">@color/alpha_blue</item>
+        <item name="boxStrokeWidth">0dp</item>
+    </style>
+
+    <style name="myOutlineBoxFocus">
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="boxStrokeWidth">3dp</item>
+        <item name="hintEnabled">false</item>
+    </style>
+
+    <style name="normal_text">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="grey_text" parent="normal_text">
+        <item name="android:textColor">@color/grey_light</item>
+    </style>
+</resources>
