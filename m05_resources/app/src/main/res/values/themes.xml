@@ -1,0 +1,29 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.M05_resources" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/dark_blue</item>
+
+        <!-- цвет основных поверхностей, к примеру цвет основной кнопки -->
+        <item name="colorPrimaryVariant">#FFFFF0</item> <!-- варант основного цвета -->
+
+        <!-- цвет текста на основных поверхностях -->
+        <item name="colorOnPrimary">@color/ivory</item>
+
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+        <item name="colorControlNormal">@color/light_blue</item>
+        <item name="colorControlActivated">@color/blue</item>
+        <item name="colorControlHighlight">@color/dark_blue</item>
+
+        <item name="android:windowBackground">@color/ivory</item>
+        <item name="fontFamily">@font/open_sans</item>
+    </style>
+
+    <style name="Theme.M05_resources" parent="Base.Theme.M05_resources" />
+
+
+</resources>
