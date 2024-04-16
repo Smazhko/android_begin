@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/questNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="123"
+        android:layout_marginTop="10dp"
+        style="@style/questionNumber"
+        />
+
+    <ImageView
+        android:id="@+id/imgFlag"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/flag_br"
+        />
+
+    <RadioGroup
+        android:id="@+id/rbGroup"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="70dp"
+        android:soundEffectsEnabled="true">
+
+        <RadioButton
+            android:id="@+id/rbVariant1"
+            style="@style/questionRB"
+            tools:text="@tools:sample/lorem/random"/>
+
+        <RadioButton
+            android:id="@+id/rbVariant2"
+            style="@style/questionRB"
+            tools:text="@tools:sample/lorem/random"/>
+
+        <RadioButton
+            android:id="@+id/rbVariant3"
+            style="@style/questionRB"
+            tools:text="@tools:sample/lorem/random"/>
+
+        <RadioButton
+            android:id="@+id/rbVariant4"
+            style="@style/questionRB"
+            tools:text="@tools:sample/lorem/random"/>
+
+    </RadioGroup>
+
+</LinearLayout>
