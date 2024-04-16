@@ -30,17 +30,12 @@
             <Button
                 android:id="@+id/buttonToStart"
                 style="@style/anotherButton"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/to_begin" />
 
             <Button
                 android:id="@+id/buttonToResult"
-                style="@style/anotherButton"
-                android:backgroundTint="@color/light_green"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
+                style="@style/anotherButton.1"
                 android:layout_weight="1"
                 android:layout_marginStart="20dp"
                 android:text="@string/to_result"

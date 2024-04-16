@@ -33,7 +33,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingHorizontal="70dp"
+        android:paddingHorizontal="60dp"
         android:soundEffectsEnabled="true">
 
         <RadioButton
