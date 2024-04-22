@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">FlagQuiz</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="str_btn_begin">НАЧАТЬ</string>
+    <string name="to_begin">В начало</string>
+    <string name="to_result">Ответить</string>
+    <string name="btn_restart">ЕЩЁ РАЗ</string>
+</resources>
