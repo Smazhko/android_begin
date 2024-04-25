@@ -1,35 +1,45 @@
 package ru.gb.flagquiz.data
 
-data object QuizStorage {
+import android.content.Context
+import ru.gb.flagquiz.R
+
+data class QuizStorage(private val context: Context) {
+
+    private val labels : Array<String> = context.resources.getStringArray(R.array.questions_titles)
+    private val quest1Answers: Array<String> = context.resources.getStringArray(R.array.quest1_answers)
+    private val quest2Answers: Array<String> = context.resources.getStringArray(R.array.quest2_answers)
+    private val quest3Answers: Array<String> = context.resources.getStringArray(R.array.quest3_answers)
+
     val questions: MutableList<Question> = mutableListOf(
         Question(
-            "Вопрос 1",
+            labels[0],
             "flag_br",
-            "Болгария",
-            "Бразилия",
-            "Аргентина",
-            "Марокко",
-            "Бразилия"
+            quest1Answers[0],
+            quest1Answers[1],
+            quest1Answers[2],
+            quest1Answers[3],
+            quest1Answers[4]
         ),
         Question(
-            "Вопрос 2",
+            labels[1],
             "flag_hr",
-            "Чехия",
-            "Португалия",
-            "Словакия",
-            "Хорватия",
-            "Хорватия"
+            quest2Answers[0],
+            quest2Answers[1],
+            quest2Answers[2],
+            quest2Answers[3],
+            quest2Answers[4]
         ),
         Question(
-            "Вопрос 3",
+            labels[2],
             "flag_nz",
-            "Новая Гвинея",
-            "Австралия",
-            "Новая Зеландия",
-            "Великобритания",
-            "Новая Зеландия"
+            quest3Answers[0],
+            quest3Answers[1],
+            quest3Answers[2],
+            quest3Answers[3],
+            quest3Answers[4]
         )
     )
+}
 
 //    fun updateQuestion(updatedQuestion: Question) {
 //        val index = questions.indexOfFirst { it.label == updatedQuestion.label }
@@ -37,4 +47,3 @@ data object QuizStorage {
 //            questions[index] = updatedQuestion
 //        }
 //    }
-}

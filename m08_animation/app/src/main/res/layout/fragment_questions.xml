@@ -31,7 +31,7 @@
                 android:id="@+id/buttonToStart"
                 style="@style/anotherButton"
                 android:layout_weight="1"
-                android:text="@string/to_begin"
+                android:text="@string/btn_to_begin_page"
                 android:focusable="true"
                 android:clickable="true"
                 />
@@ -41,7 +41,7 @@
                 style="@style/anotherButton.1"
                 android:layout_weight="1"
                 android:layout_marginStart="20dp"
-                android:text="@string/to_result"
+                android:text="@string/btn_to_result_page"
                 android:focusable="true"
                 android:clickable="true"
                 />
