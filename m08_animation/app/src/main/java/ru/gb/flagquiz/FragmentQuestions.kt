@@ -19,8 +19,6 @@ import ru.gb.flagquiz.databinding.FragmentQuestionsBinding
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-private lateinit var quizStorage: QuizStorage
-
 /**
  * A simple [Fragment] subclass.
  * Use the [FragmentQuestions.newInstance] factory method to
@@ -54,8 +52,6 @@ class FragmentQuestions : Fragment() {
         val slideInAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.fragment_slide_in_toleft)
         _binding?.root?.startAnimation(slideInAnimation)
 
-        quizStorage = QuizStorage(requireContext())
-
         return binding.root
     }
 
@@ -71,7 +67,7 @@ class FragmentQuestions : Fragment() {
 
         binding.buttonToResult.setOnClickListener {
             val bundle = bundleOf(ARG_PARAM1 to getResultOfQuiz(),
-                ARG_PARAM2 to quizStorage.questions.size)
+                ARG_PARAM2 to QuizStorage.questions.size)
             clearAllRadioGroups()
             clearUserAnswers()
 //            findNavController().popBackStack(R.id.QuestionsFrg, false)
@@ -79,7 +75,7 @@ class FragmentQuestions : Fragment() {
             findNavController().navigate(R.id.action_Questions_to_Result, bundle)
         }
 
-        for (q in quizStorage.questions) {
+        for (q in QuizStorage.questions) {
             // создаём экземпляр вьюшки с вопросом
             val questionView = QuestionLayout(requireContext())
             // заполняем вьюшку из дата-объекта
@@ -100,7 +96,7 @@ class FragmentQuestions : Fragment() {
 
     private fun getResultOfQuiz () : Int{
         var rightAnswersCount = 0
-        for (q in quizStorage.questions) {
+        for (q in QuizStorage.questions) {
             if (q.userAnswer.equals(q.rightAnswer)){
                 rightAnswersCount += 1
             }
@@ -121,7 +117,7 @@ class FragmentQuestions : Fragment() {
     }
 
     private fun clearUserAnswers() {
-        for (q in quizStorage.questions) {
+        for (q in QuizStorage.questions) {
             q.userAnswer = ""
         }
     }

@@ -1,60 +1,8 @@
 <resources>
     <string name="app_name">FlagQuiz</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="btn_begin">BEGIN</string>
-    <string name="btn_date">Enter Birthday</string>
-    <string name="btn_to_begin_page">To Start</string>
-    <string name="btn_to_result_page">Answer</string>
-    <string name="btn_restart">RESTART</string>
-    <string name="choose_date">Chose date of your birthday</string>
-    <string name="label_time_now">Quiz begins at</string>
-
-    <string-array name="questions_titles">
-        <item>Question 1</item>
-        <item>Question 2</item>
-        <item>Question 3</item>
-    </string-array>
-
-    <string-array name="quest1_answers">
-        <item>Bulgaria</item>
-        <item>Brazil</item>
-        <item>Argentina</item>
-        <item>Morocco</item>
-        <item>Brazil</item>
-    </string-array>
-
-    <string-array name="quest2_answers">
-        <item>Czech Republic</item>
-        <item>Portugal</item>
-        <item>Croatia</item>
-        <item>Slovakia</item>
-        <item>Croatia</item>
-    </string-array>
-
-    <string-array name="quest3_answers">
-        <item>New Guinea</item>
-        <item>Australia</item>
-        <item>New Zealand</item>
-        <item>United Kingdom</item>
-        <item>New Zealand</item>
-    </string-array>
-
-    <plurals name="count_hours">
-        <item quantity="zero">%1$d hours</item>
-        <item quantity="one">%1$d hour</item>
-        <item quantity="two">%1$d hours</item>
-        <item quantity="few">%1$d hours</item>
-        <item quantity="other">%1$d hours</item>
-        <item quantity="many">%1$d hours</item>
-    </plurals>
-
-    <plurals name="count_minutes">
-        <item quantity="zero">%1$d minutes</item>
-        <item quantity="one">%1$d minute</item>
-        <item quantity="two">%1$d minutes</item>
-        <item quantity="few">%1$d minutes</item>
-        <item quantity="other">%1$d minutes</item>
-        <item quantity="many">%1$d minutes</item>
-    </plurals>
-
+    <string name="str_btn_begin">НАЧАТЬ</string>
+    <string name="to_begin">В начало</string>
+    <string name="to_result">Ответить</string>
+    <string name="btn_restart">ЕЩЁ РАЗ</string>
 </resources>
