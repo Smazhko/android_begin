@@ -19,6 +19,15 @@ import kotlinx.coroutines.*
 class MainActivity : AppCompatActivity() {
 
     val scope = CoroutineScope(Dispatchers.Main)
+//    CoroutineScope - это область, в которой можно запускать корутины. Он предоставляет контекст
+//    выполнения для корутин. Корутины, запущенные в пределах определенной области, будут
+//    автоматически отменены при завершении этой области.
+//    CoroutineScope предоставляет управление временем жизни корутин и их обработку. Обычно область
+//    корутины создается вместе с активностью, фрагментом или другим компонентом приложения и
+//    связывается с их жизненным циклом. Когда активность или фрагмент завершает свою работу,
+//    все запущенные в ней корутины автоматически отменяются, что помогает избежать утечек ресурсов
+//    и других проблем.
+
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var counterTextView: TextView
@@ -171,7 +180,11 @@ class MainActivity : AppCompatActivity() {
         counterTextView.text = fullTime.toString()
         progressBar.max=fullTime
         progressBar.setProgress(fullTime)
-        progressBar.requestLayout() // запасная перерисовка компонента
+
+        // запасная перерисовка компонента на случай глюка анимации. у других компонентов
+        // за перериосовку будут отвечать другие очень разнгые по названиям  методы
+        progressBar.requestLayout()
+
         Log.d("stopThread", "remainTime: $remainTime | fullTime: $fullTime")
     }
 
