@@ -50,12 +50,14 @@ class MainActivity : AppCompatActivity() {
         savedInstanceState?.let { bundle ->
             fullTime = bundle.getInt("fullTime", 20)
             remainTime = bundle.getInt("remainTime", 20)
-            isTimerRunning = bundle.getBoolean("isTimerRunning", false)
+            isTimerRunning = bundle.getBoolean("isTimerRunning")
             if (isTimerRunning)
                 startTimer()
         }
 
         slider.value = fullTime.toFloat()
+        counterTextView.text = remainTime.toString()
+        progressBar.max = fullTime
         progressBar.setProgress(fullTime)
 
         slider.addOnChangeListener { _, value, _ ->
@@ -89,9 +91,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun startTimer() {
         isTimerRunning = true
-        startButton.text = getString(R.string.stop)
+        fullTime = slider.value.toInt()
+
         startButton.textSize = 32F
+        startButton.text = getString(R.string.stop)
         slider.isEnabled = false
+        counterTextView.text = remainTime.toString()
         progressBar.max = fullTime
         progressBar.setProgress(remainTime)
 
@@ -103,7 +108,12 @@ class MainActivity : AppCompatActivity() {
         countdownThread?.interrupt()
         countdownThread = null
 
+        // сбрасываем переменные
         isTimerRunning = false
+        fullTime = slider.value.toInt()
+        remainTime = fullTime
+
+        // сбрасываем элементы в начальное состояние
         startButton.textSize = 26F
         startButton.text = getString(R.string.start)
         slider.isEnabled = true
