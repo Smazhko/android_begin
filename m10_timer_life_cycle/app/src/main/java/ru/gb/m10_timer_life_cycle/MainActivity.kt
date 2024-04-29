@@ -13,9 +13,12 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.slider.Slider
 import ru.gb.m10_timer_life_cycle.databinding.ActivityMainBinding
+import kotlinx.coroutines.*
 
 
 class MainActivity : AppCompatActivity() {
+
+    val scope = CoroutineScope(Dispatchers.Main)
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var counterTextView: TextView
@@ -79,6 +82,15 @@ class MainActivity : AppCompatActivity() {
             if (!isTimerRunning) {
                 Log.d("123", ">>>>>>>>>нажата кнопка СТАРТ")
                 startTimer()
+                // Делаем кнопку недоступной после нажатия
+                startButton.isEnabled = false
+
+                // Запускаем корутину для задержки выполнения кода на 500 миллисекунд
+                scope.launch {
+                    delay(1000)
+                    // После задержки делаем кнопку доступной
+                    startButton.isEnabled = true
+                }
             } else {
                 Log.d("123", ">>>>>>>>>> нажата кнопка СТОП")
                 stopTimer()
