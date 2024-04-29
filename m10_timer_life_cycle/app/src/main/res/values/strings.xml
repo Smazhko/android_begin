@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">m10_timer_life_cycle</string>
+    <string name="app_name">Countdown</string>
     <string name="start">START</string>
     <string name="countdown_timer">Countdown timer</string>
     <string name="stop">STOP</string>
