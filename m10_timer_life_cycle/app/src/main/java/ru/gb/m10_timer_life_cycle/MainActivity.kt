@@ -14,6 +14,7 @@ import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.slider.Slider
 import ru.gb.m10_timer_life_cycle.databinding.ActivityMainBinding
 
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -22,8 +23,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var slider: Slider
     private lateinit var startButton: MaterialButton
 
-    private var countdownThread: CountdownThread? = null
+    private var fullTime: Int = 20
+    private var remainTime: Int = 20
     private var isTimerRunning = false
+
+    private var countdownThread: CountdownThread? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,16 +47,27 @@ class MainActivity : AppCompatActivity() {
         slider = binding.slider
         startButton = binding.btnStart
 
-        slider.value = 20F
-        progressBar.setProgress(slider.value.toInt())
-
-        slider.addOnChangeListener { _, value, _ ->
-            counterTextView.text = value.toInt().toString()
-            progressBar.max=value.toInt()
-            progressBar.setProgress(value.toInt())
+        savedInstanceState?.let { bundle ->
+            fullTime = bundle.getInt("fullTime", 20)
+            remainTime = bundle.getInt("remainTime", 20)
+            isTimerRunning = bundle.getBoolean("isTimerRunning", false)
+            if (isTimerRunning)
+                startTimer()
         }
 
-        startButton.setOnClickListener{
+        slider.value = fullTime.toFloat()
+        progressBar.setProgress(fullTime)
+
+        slider.addOnChangeListener { _, value, _ ->
+            fullTime = value.toInt()
+            remainTime = value.toInt()
+            counterTextView.text = fullTime.toString()
+            progressBar.max = fullTime
+            progressBar.setProgress(fullTime)
+        }
+
+
+        startButton.setOnClickListener {
             if (!isTimerRunning) {
                 Log.d("123", ">>>>>>>>>нажата кнопка СТАРТ")
                 startTimer()
@@ -65,33 +80,43 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt("fullTime", fullTime)
+        outState.putInt("remainTime", remainTime)
+        outState.putBoolean("isTimerRunning", isTimerRunning)
+        super.onSaveInstanceState(outState)
+    }
+
     private fun startTimer() {
         isTimerRunning = true
-        countdownThread = CountdownThread()
         startButton.text = getString(R.string.stop)
         startButton.textSize = 32F
         slider.isEnabled = false
-        progressBar.max = slider.value.toInt()
-        progressBar.setProgress(slider.value.toInt())
+        progressBar.max = fullTime
+        progressBar.setProgress(remainTime)
+
+        countdownThread = CountdownThread()
         countdownThread?.start()
     }
 
     private fun stopTimer() {
-        isTimerRunning = false
         countdownThread?.interrupt()
         countdownThread = null
+
+        isTimerRunning = false
         startButton.textSize = 26F
         startButton.text = getString(R.string.start)
         slider.isEnabled = true
-        counterTextView.text = slider.value.toInt().toString()
-        progressBar.setProgress(slider.value.toInt())
+        counterTextView.text = fullTime.toString()
+        progressBar.max=fullTime
+        progressBar.setProgress(fullTime)
     }
 
-    private inner class CountdownThread : Thread() {
+    private inner class CountdownThread() : Thread() {
         override fun run() {
-            val maxSeconds = slider.value.toInt()
+            val maxSeconds = fullTime
             val countdownHandler = Handler(Looper.getMainLooper())
-            var secondsRemaining = maxSeconds
+            var secondsRemaining = remainTime
 
             while (secondsRemaining >= 0 && isTimerRunning) {
                 countdownHandler.post {
@@ -107,6 +132,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 secondsRemaining--
+                remainTime = secondsRemaining
             }
 
             // Сброс состояния после завершения таймера

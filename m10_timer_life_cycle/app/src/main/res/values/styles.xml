@@ -3,13 +3,13 @@
 
 
     <style name="title_text">
-        <item name="android:fontFamily">@font/jetbrains_mono_extrabold</item>
+        <item name="android:fontFamily">@font/maven_pro_black</item>
         <item name="android:textSize">32sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="counter_text">
-        <item name="android:fontFamily">@font/jetbrains_mono_extrabold</item>
+        <item name="android:fontFamily">@font/maven_pro_black</item>
         <item name="android:textSize">52sp</item>
         <item name="android:textColor">@color/black</item>
     </style>

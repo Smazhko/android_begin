@@ -2,5 +2,6 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/jetbrains_mono_extrabold</item>
+        <item>@font/maven_pro_black</item>
     </array>
 </resources>
