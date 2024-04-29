@@ -31,6 +31,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        savedInstanceState?.let{
+            Log.d("ON-CREATE", it.toString())
+        }
+
         enableEdgeToEdge()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -48,17 +53,18 @@ class MainActivity : AppCompatActivity() {
         startButton = binding.btnStart
 
         savedInstanceState?.let { bundle ->
-            fullTime = bundle.getInt("fullTime", 20)
-            remainTime = bundle.getInt("remainTime", 20)
+            Log.d("MAIN", "ПЕРЕВОРОТ **********************************")
+            fullTime = bundle.getInt("fullTime")
+            remainTime = bundle.getInt("remainTime")
             isTimerRunning = bundle.getBoolean("isTimerRunning")
-            if (isTimerRunning)
-                startTimer()
+            if (isTimerRunning) startTimer()
+            Log.d("ПЕРЕВОРОТ", "remainTime: $remainTime | fullTime: $fullTime | $isTimerRunning")
         }
 
         slider.value = fullTime.toFloat()
         counterTextView.text = remainTime.toString()
         progressBar.max = fullTime
-        progressBar.setProgress(fullTime)
+        progressBar.setProgress(remainTime)
 
         slider.addOnChangeListener { _, value, _ ->
             fullTime = value.toInt()
@@ -77,7 +83,7 @@ class MainActivity : AppCompatActivity() {
                 Log.d("123", ">>>>>>>>>> нажата кнопка СТОП")
                 stopTimer()
             }
-            Log.d("123", isTimerRunning.toString())
+            Log.d("123", "isTimerRunning = " + isTimerRunning.toString())
         }
 
     }
@@ -87,18 +93,29 @@ class MainActivity : AppCompatActivity() {
         outState.putInt("remainTime", remainTime)
         outState.putBoolean("isTimerRunning", isTimerRunning)
         super.onSaveInstanceState(outState)
+        countdownThread?.interrupt()
+        countdownThread = null
+        Log.d("ДО ПЕРЕВОРОТА", "СОХРАНЕНИЕ: remainTime: $remainTime | fullTime: $fullTime | $isTimerRunning")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        countdownThread?.interrupt()
+        countdownThread = null
     }
 
     private fun startTimer() {
         isTimerRunning = true
-        fullTime = slider.value.toInt()
 
         startButton.textSize = 32F
         startButton.text = getString(R.string.stop)
         slider.isEnabled = false
+        slider.value = fullTime.toFloat()
         counterTextView.text = remainTime.toString()
         progressBar.max = fullTime
         progressBar.setProgress(remainTime)
+
+        Log.d("RUNThread", "remainTime: $remainTime | fullTime: $fullTime")
 
         countdownThread = CountdownThread()
         countdownThread?.start()
@@ -120,10 +137,12 @@ class MainActivity : AppCompatActivity() {
         counterTextView.text = fullTime.toString()
         progressBar.max=fullTime
         progressBar.setProgress(fullTime)
+        Log.d("stopThread", "remainTime: $remainTime | fullTime: $fullTime")
     }
 
     private inner class CountdownThread() : Thread() {
         override fun run() {
+            var tag: String = Thread.currentThread().name
             val maxSeconds = fullTime
             val countdownHandler = Handler(Looper.getMainLooper())
             var secondsRemaining = remainTime
@@ -133,6 +152,7 @@ class MainActivity : AppCompatActivity() {
                     counterTextView.text = secondsRemaining.toString()
                     progressBar.setProgress(maxSeconds - secondsRemaining, true)
                 }
+                // Log.d(tag, "counterTextView: ${counterTextView.hashCode()} | progressBar: ${progressBar.hashCode()}")
 
                 try {
                     sleep(1000) // Пауза на 1 секунду
@@ -143,6 +163,7 @@ class MainActivity : AppCompatActivity() {
 
                 secondsRemaining--
                 remainTime = secondsRemaining
+                Log.d(tag, "secondsRemaining: $secondsRemaining  | remainTime: $remainTime | maxSeconds: $maxSeconds")
             }
 
             // Сброс состояния после завершения таймера
