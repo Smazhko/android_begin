@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="title_text">
+        <item name="android:fontFamily">@font/jetbrains_mono_extrabold</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="counter_text">
+        <item name="android:fontFamily">@font/jetbrains_mono_extrabold</item>
+        <item name="android:textSize">52sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="btn" parent="@style/Widget.Material3.Button.IconButton.Outlined">
+        <item name="android:textSize">26sp</item>
+        <item name="strokeWidth">3dp</item>
+    </style>
+
+
+</resources>

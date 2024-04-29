@@ -136,8 +136,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            >
+            android:layout_marginTop="16dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -153,20 +152,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/points_count"
-                app:layout_constraintBottom_toTopOf="@id/progrBar"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:textAppearance="@style/grey_text"
-                />
+                app:layout_constraintBottom_toTopOf="@id/progrBar"
+                app:layout_constraintEnd_toEndOf="parent" />
 
 
             <com.google.android.material.progressindicator.LinearProgressIndicator
                 android:id="@+id/progrBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="339dp"
+                android:layout_height="9dp"
                 android:paddingTop="8dp"
                 android:progress="50"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button

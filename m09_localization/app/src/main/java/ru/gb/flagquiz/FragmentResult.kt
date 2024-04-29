@@ -22,6 +22,18 @@ private const val ARG_PARAM2 = "param2"
  */
 class FragmentResult : Fragment() {
     // TODO: Rename and change types of parameters
+
+    // чтобы параметры принимались этим фрагментом, надо их прописать в НАВИГАЦИИ
+    //        <argument
+    //            android:name="param1"
+    //            app:argType="integer"
+    //            android:defaultValue="0"
+    //            />
+    //        <argument
+    //            android:name="param2"
+    //            app:argType="integer"
+    //            android:defaultValue="0"
+    //            />
     private var param1: Int? = null
     private var param2: Int? = null
 
@@ -50,6 +62,10 @@ class FragmentResult : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // установка картинок для звёздочек в зависимости от количества правильных ответов
+        // картники - цветная здвезда, либо серая. по умолчанию все - серые.
+        // param1 автоматом принимает аргументы из фрагмента с вопросами,
+        // потому что это задано в параметрах перехода от фрагмента с вопросами к фрагменту с результатами
         when (param1) {
             1 -> binding.imgStar1.setImageResource(R.drawable.star)
             2 -> {
@@ -63,14 +79,24 @@ class FragmentResult : Fragment() {
             }
         }
 
+        // при прорисовке фрагмента - устанавливаем анимацию входа,
+        // которая описана в res/anim/fragment_slide_in_up
         val slideInAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.fragment_slide_in_up)
         _binding?.root?.startAnimation(slideInAnimation)
 
+        // при клике на кнопку - ЕЩЕ РАЗ - переходим на фрагмент с вопросами
+        // чтобы не оставлять фрагмент в истории, чтобы к нему нельзя было вернуться по кнопке НАЗАД
+        // в НАВИГАЦИИ прописываем
+        //        app:popUpTo="@+id/ResultFrg"
+        //        app:popUpToInclusive="true"
         binding.btnRepeat.setOnClickListener {
-//            findNavController().popBackStack(R.id.ResultFrg, true)
+//            findNavController().popBackStack(R.id.ResultFrg, true) // ещё один способ, чтобы не сохранять фрагмент в истории
+            // навигация перехода от фрагмента к фрагменту, прописанная в res/navigation
             findNavController().navigate(R.id.action_Result_to_Questions)
         }
 
+        // установка начальных значений масштаба и прозрачности
+        // для дальнейшего развёртывания анимации
         binding.imgStar1.scaleX = 0f
         binding.imgStar1.scaleY = 0f
         binding.imgStar1.alpha = 0f
@@ -83,6 +109,8 @@ class FragmentResult : Fragment() {
         binding.imgStar3.scaleY = 0f
         binding.imgStar3.alpha = 0f
 
+        // анимация вылета звёздочек
+        // установлена стартовая задержка setStartDelay(ххх), чтобы они вылетали по очереди
         binding.imgStar1.animate().apply {
             setStartDelay(500)
             scaleX(1f)

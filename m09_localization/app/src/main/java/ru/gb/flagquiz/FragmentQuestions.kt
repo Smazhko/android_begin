@@ -51,6 +51,7 @@ class FragmentQuestions : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentQuestionsBinding.inflate(inflater, container, false)
 
+        // при прорисовывании фрагмента вызываем анимацию входа, сохраненную в res/anim/fragment_slide_in_toleft
         val slideInAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.fragment_slide_in_toleft)
         _binding?.root?.startAnimation(slideInAnimation)
 
@@ -62,31 +63,42 @@ class FragmentQuestions : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // кнопка перехода к стартовому экрану
         binding.buttonToStart.setOnClickListener {
             clearAllRadioGroups()
             clearUserAnswers()
 //            findNavController().popBackStack(R.id.QuestionsFrg, false)
+            // навигация перехода от фрагмента к фрагменту, прописанная в res/navigation
             findNavController().navigate(R.id.action_Questions_to_Title)
         }
 
+        // кнопка перехода к результатам
         binding.buttonToResult.setOnClickListener {
+            // создаём БАНДЛ для отправки параметров от текущего фрагмента во врагмент с результатами
+            // БАНДЛ - МАП (список пар ключ-значение), где
+            // ключ - переменная для параметра, которая задаётся в классе текущего фрагмента,
+            // значение - данные, которые надо передать.
             val bundle = bundleOf(ARG_PARAM1 to getResultOfQuiz(),
                 ARG_PARAM2 to quizStorage.questions.size)
             clearAllRadioGroups()
             clearUserAnswers()
 //            findNavController().popBackStack(R.id.QuestionsFrg, false)
 //            findNavController().popBackStack(R.id.TitleFrg, true)
+            // навигация перехода от фрагмента к фрагменту, прописанная в res/navigation
             findNavController().navigate(R.id.action_Questions_to_Result, bundle)
         }
 
         for (q in quizStorage.questions) {
             // создаём экземпляр вьюшки с вопросом
             val questionView = QuestionLayout(requireContext())
-            // заполняем вьюшку из дата-объекта
+            // заполняем вьюшку из дата-класса
             questionView.setData(q)
-            // добавляем взаполненную вьюшку во фрагмент
+            // добавляем заполненную вьюшку во фрагмент
             binding.questionContainer.addView(questionView)
 
+            // добавляем эффект проявления в радио-групп
+            // в apply прописываем все свойства эффекта
+            // интерполятор нужен для разгона и замедления эффекта
             val rbGrp = questionView.findViewById<RadioGroup>(R.id.rbGroup)
             rbGrp.alpha = 0f
             rbGrp.animate().apply {
@@ -99,6 +111,8 @@ class FragmentQuestions : Fragment() {
     }
 
     private fun getResultOfQuiz () : Int{
+        // вычисляем количество правильных ответов -
+        // сравниваем ответ пользовтеля с правильным из дата-класса
         var rightAnswersCount = 0
         for (q in quizStorage.questions) {
             if (q.userAnswer.equals(q.rightAnswer)){
@@ -109,7 +123,10 @@ class FragmentQuestions : Fragment() {
     }
 
     private fun clearAllRadioGroups() {
+        // очищаем выбор во всех радио-группах
         val questContainer = binding.questionContainer
+        // считаем, сколько всего детей в квест-контейнере
+        // если текущий ребенок в цикле - это радиогруппа, то очищаем выбор
         for (i in 0 until questContainer.childCount) {
             val view = questContainer.getChildAt(i)
             // Проверяем, является ли текущая view объектом RadioGroup
@@ -127,16 +144,22 @@ class FragmentQuestions : Fragment() {
     }
 
     override fun onStop(){
+        // при закрытии фрагмента - вызываем анимацию, сохранённую в res/anim/fragment_slide_out_up.xml
         val slideOutAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.fragment_slide_out_up)
         requireView().startAnimation(slideOutAnimation)
         super.onStop()
     }
 
     override fun onDestroyView() {
+        // обнуляем биндинг при закрытии фрагмента, чтоб не оставалось никаких хвостов
         super.onDestroyView()
         _binding = null
     }
     companion object {
+        // этим мы фактически не пользуемся.
+        // передача данных между фрагментами идёт по
+        //        private var param1: String? = null
+        //        private var param2: String? = null
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.

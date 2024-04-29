@@ -29,14 +29,19 @@ class FragmentTitle : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    // для взаимодействия с формой календаря вводим переменную КАЛЕНДАРЬ
     private val calendar = Calendar.getInstance()
+    // а также шаблон для вывода даты
+    // тоже самое можно со временем
     val dateFormat = SimpleDateFormat("dd.MM.YYYY")
 
-
+    // хитрый способ задать БИНДИНГ, чтобы его потом можно было обнулить
     private var _binding: FragmentTitleBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -48,11 +53,20 @@ class FragmentTitle : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // слушатель нажатия кнопки СТАРТ
         binding.buttonStart.setOnClickListener {
+            // переход к фрагменту с вопросами
             findNavController().navigate(R.id.action_Title_to_Questions)
+
+            // вывод SNACK с временем начала игры в формате 10 ЧАСОВ 00 МИНУТ
+            // для склонения слов по падежам в зависимости от числа используем PLURALS
+            // которые прописаны в RES/VALUES/STRINGS - также поддаётся локализациии
             val localTime = LocalTime.now()
             val hour = localTime.hour
             val minute = localTime.minute
+            // ниже - достаём PLURALS из XML и применяем к строке.
+            // в зависимости от значения hour  поставится нужный падеж
+            // hour в параметрах нужно указать ДВАЖДЫ
             val time_hours = resources.getQuantityString(R.plurals.count_hours, hour, hour)
             val time_minutes = resources.getQuantityString(R.plurals.count_minutes, minute, minute)
             val text = getString(R.string.label_time_now) + ": $time_hours $time_minutes"
@@ -61,30 +75,44 @@ class FragmentTitle : Fragment() {
 
         binding.buttonDate.setOnClickListener {
             // чтобы выставить календарь в предыдущую выбранную дату
-            // чтобы дать форме календаря команду открыться на нудном месяце
+            // чтобы дать форме календаря команду открыться на нужном месяце
             val constraintCalend = CalendarConstraints.Builder()
                 .setOpenAt(calendar.timeInMillis)
                 .build()
 
+            // Создаём диалог календаря в отдельной переменной, чтобы
+            // сначала добавить обработчик события для подтверждения даты,
+            // а уже потом уже вывести сам диалог на экран - show().
+            // Создание диалога использует паттерн проектирования BUILDER,
+            // с помощью которого можно ПОШАГОВО задавать параметры создаваемого объекта.
+            // Соответственно - сначала идут несколько SET. а затем создем обхект командой BUILD.
             val dateDialog = MaterialDatePicker.Builder.datePicker()
                 .setCalendarConstraints(constraintCalend) // чтобы выставить календарь в предыдущую выбранную дату
-                .setTitleText(resources.getString(R.string.choose_date))
+                .setTitleText(resources.getString(R.string.choose_date)) // устанавливаем заголовок диалога календаря
                 .build()
+
             dateDialog.addOnPositiveButtonClickListener { timeInMillis ->
+                // присваиваем локальной переменной нашего фрагмента calendar значение,
+                // которое выбрано пользователем в диалоге календаря
                     calendar.timeInMillis =  timeInMillis
+                // другой способ - вместо ШАБЛОНА - получить данные из календаря
 //                    val day = calendar.get(Calendar.DAY_OF_MONTH)
 //                    val month = calendar.get(Calendar.MONTH) + 1
 //                    val year = calendar.get(Calendar.YEAR)
 //                val text = "$day.$month.$year"
 //                Snackbar.make(binding.buttonDate, text, Snackbar.LENGTH_SHORT).show()
                 Snackbar.make(binding.buttonDate, dateFormat.format(calendar.time), Snackbar.LENGTH_SHORT).show()
-
                 }
-            dateDialog.show(childFragmentManager, "GatePicker") // ы активити используется supportFragmentManager
+            // ВЫЗЫВАЕМ ДИАЛОГ КАЛЕНДАРЯ. так как мы работаем из фрагмента, то в параметрах SHOW
+            // используем childFragmentManager
+            // в активити жа используется supportFragmentManager
+            // также указываем ТЕГ, по которому сможем потом к диалогу обращаться - "GatePicker"
+            dateDialog.show(childFragmentManager, "GatePicker")
         }
     }
 
     override fun onStop(){
+        // при закрытии фрагмента показываем анимацию ВЫХОДА, которая сохранена в res/anim
         val slideOutAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.fragment_slide_out_toleft)
         requireView().startAnimation(slideOutAnimation)
         super.onStop()
@@ -102,6 +130,7 @@ class FragmentTitle : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentTitleBinding.inflate(inflater, container, false)
 
+        // показываем анимацию входа фрагмента на экран - увеличение из центра, которая сохранена в res/anim
         val slideInAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.fragment_explode)
         _binding?.root?.startAnimation(slideInAnimation)
 
