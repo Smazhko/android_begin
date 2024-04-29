@@ -64,14 +64,14 @@ class MainActivity : AppCompatActivity() {
         slider.value = fullTime.toFloat()
         counterTextView.text = remainTime.toString()
         progressBar.max = fullTime
-        progressBar.setProgress(remainTime)
+        progressBar.progress = remainTime
 
         slider.addOnChangeListener { _, value, _ ->
             fullTime = value.toInt()
             remainTime = value.toInt()
             counterTextView.text = fullTime.toString()
             progressBar.max = fullTime
-            progressBar.setProgress(fullTime)
+            progressBar.progress = fullTime
         }
 
 
@@ -137,6 +137,7 @@ class MainActivity : AppCompatActivity() {
         counterTextView.text = fullTime.toString()
         progressBar.max=fullTime
         progressBar.setProgress(fullTime)
+        progressBar.requestLayout() // запасная перерисовка компонента
         Log.d("stopThread", "remainTime: $remainTime | fullTime: $fullTime")
     }
 

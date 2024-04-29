@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:indicatorSize="150dp"
-        app:trackColor="@color/white"
+        app:trackColor="@color/almost_white"
         app:indicatorColor="@color/design_default_color_error"
         app:trackThickness="15dp"
         android:indeterminate="false"
