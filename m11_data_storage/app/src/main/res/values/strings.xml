@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">m11_data_storage</string>
+    <string name="txt_save_to_file">Файл</string>
+    <string name="txt_save_to_shar_pref">Shared Preference</string>
+    <string name="txt_save_to_local_var">Локальная переменная</string>
+    <string name="txt_editText_hint">Введите текст</string>
+    <string name="txt_clear_all">Очистить всё</string>
+</resources>
