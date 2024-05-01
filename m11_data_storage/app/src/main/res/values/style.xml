@@ -3,6 +3,7 @@
 
     <style name="button_layout">
         <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
 </resources>
