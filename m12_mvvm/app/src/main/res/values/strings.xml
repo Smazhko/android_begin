@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">m12_mvvm</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_result">Результаты поиска</string>
+    <string name="btn_search">Найти!</string>
+    <string name="search_line">Поиск</string>
+    <string name="search_continue">Идёт поиск ...</string>
+    <string name="search_no_result">По Вашему запросу ничего не найдено</string>
+</resources>
