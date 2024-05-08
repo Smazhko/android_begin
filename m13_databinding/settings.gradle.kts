@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "m12_mvvm"
+rootProject.name = "m13_databinding"
 include(":app")
  

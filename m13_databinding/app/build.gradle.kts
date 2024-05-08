@@ -1,15 +1,15 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    kotlin("kapt")
+    id ("kotlin-kapt")
 }
 
 android {
-    namespace = "ru.gb.m12_mvvm"
+    namespace = "ru.gb.m13_databinding"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "ru.gb.m12_mvvm"
+        applicationId = "ru.gb.m13_databinding"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
@@ -42,6 +42,7 @@ android {
 }
 
 dependencies {
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

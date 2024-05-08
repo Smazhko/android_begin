@@ -1,66 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <data>
+        <import type="android.view.View"/>
+        <import type="ru.gb.m13_databinding.State"/>
+        <import type="ru.gb.m13_databinding.Search"/>
+        <variable
+            name="viewModel"
+            type="ru.gb.m13_databinding.MainViewModel" />
+
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainFragment">
+        tools:context="ru.gb.m13_databinding.MainFragment">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/loginLayout"
+            android:id="@+id/search_layout"
+            android:paddingHorizontal="15dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/login_hint"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="@string/search_line"
+            android:layout_marginTop="100dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/passwordLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="password"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/loginLayout">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="140dp"
-            android:layout_height="41dp"
-            android:text="CLICK ME"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints" />
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/searchText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="30dp"
+                tools:ignore="RtlSymmetry"
+                android:textSize="20sp"
+                android:text="@={viewModel.searchString}"
+                android:onTextChanged="@{(text, before, on, after) -> viewModel.startSearch(searchText)}"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <ProgressBar
             android:id="@+id/progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/button"
-            app:layout_constraintStart_toEndOf="@+id/button"
-            app:layout_constraintTop_toTopOf="@+id/button" />
+            android:text="@string/search_result"
+            app:layout_constraintEnd_toEndOf="@id/search_layout"
+            app:layout_constraintTop_toTopOf="@id/search_layout"
+            app:layout_constraintBottom_toBottomOf="@id/search_layout"
+            android:layout_marginEnd="30dp"
+            android:visibility="@{viewModel.state.Loading ? View.VISIBLE : View.GONE}"
+            />
+
+
+        <TextView
+            android:id="@+id/search_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:text="@{viewModel.state.result}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_layout"
+            android:layout_marginTop="40dp"
+            android:textAlignment="center"
+            android:textSize="20sp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <data>
-
-
-    </data>
 </layout>
