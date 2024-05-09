@@ -1,26 +1,21 @@
 package ru.gb.m13_databinding
 
-import android.util.LayoutDirection
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
 
 // logd -> TAB
 private const val TAG = "MainViewModel"
@@ -28,40 +23,47 @@ private const val TAG = "MainViewModel"
 class MainViewModel : ViewModel() {
 
     // Объявляем переменную для хранения корутины поиска
-    private lateinit var searchJob: Job
+    private lateinit var _searchJob: Job
 
     private val _state: MutableStateFlow<State> = MutableStateFlow<State>(State.Start)
     val state: StateFlow<State> = _state.asStateFlow()
 
     val searchString = MutableStateFlow("")
 
-    fun startSearch(v: View) {
-        Log.d(TAG, "СТАРТ ПОИСКА")
-        searchString
-            .debounce(300)
-            .filter { it.length > 2 }
-            .distinctUntilChanged()
-            .onEach { request ->
-                Log.d(TAG, "Получение из View: $request = ${request.length}")
-
-                // Отменяем предыдущую корутину, если она была запущена - (*) читай сноску
-                if (::searchJob.isInitialized && searchJob.isActive) {
-                    Log.d(TAG, "предыдущая корутина остановлена")
-                    searchJob.cancel()
-                }
-
-                // Запускаем новую корутину
-                searchJob = viewModelScope.launch {
-                    Log.d(TAG, "запуск новой корутины... ")
-                    _state.value = State.Loading()
-                    delay(5_000)
-                    _state.value = State.Fail(request)
-                    Log.d(TAG, "request = $request result ${_state.value.result}")
-                }
-            }.launchIn(viewModelScope)
+    init {
+        viewModelScope.launch {
+            searchString
+                .debounce(300)
+                .filter { it.length > 2 }
+                .onEach {
+                    startSearch(it)
+                }.collect()
+        }
     }
 
+    fun startSearch(request: String) {
+        Log.d(TAG, "СТАРТ ПОИСКА")
 
+        Log.d(TAG, "Получение из View: $request (длина ${request.length})")
+
+        // Отменяем предыдущую корутину, если она была запущена - (*) читай сноску
+        if (::_searchJob.isInitialized && _searchJob.isActive) {
+            _searchJob.cancel()
+            Log.d(TAG, "предыдущая корутина остановлена - ${_searchJob.isCancelled}")
+        }
+        // Запускаем новую корутину
+        _searchJob = viewModelScope.launch {
+            Log.d(TAG, "запуск новой корутины... ")
+            doSearch(request)
+        }
+    }
+
+    suspend fun doSearch(requestStr: String): Unit {
+        _state.value = State.Loading()
+        delay(5_000)
+        _state.value = State.Fail(requestStr)
+        Log.d(TAG, "request = $requestStr result ${_state.value.result}")
+    }
 }
 
 
