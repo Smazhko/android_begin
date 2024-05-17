@@ -8,9 +8,4 @@
 
     </style>
 
-    <style name="ImageViewDefaultStyle">
-        <item name="android:background">@drawable/pngwing_com</item>
-
-    </style>
-
 </resources>
