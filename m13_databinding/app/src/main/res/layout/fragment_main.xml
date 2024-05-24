@@ -10,8 +10,6 @@
         <variable
             name="viewModel"
             type="ru.gb.m13_databinding.MainViewModel" />
-
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

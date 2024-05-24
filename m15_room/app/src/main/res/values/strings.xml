@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">m15_room</string>
+    <string name="text_input_hint">Введите слово</string>
+    <string name="btn_add_text">ДОБАВИТЬ</string>
+    <string name="btn_delete_text">УДАЛИТЬ ВСЁ</string>
+    <string name="wrong_input">Некорректный ввод! Допустимы только буквы и дефисы.</string>
+</resources>

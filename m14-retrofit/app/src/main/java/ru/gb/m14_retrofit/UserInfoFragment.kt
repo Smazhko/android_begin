@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import ru.gb.m14_retrofit.databinding.FragmentUserInfoBinding
 
@@ -33,7 +34,8 @@ class UserInfoFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         // вызываем загрузку данных при запуске программы
-        viewModel.loadUserInfo(requireContext())
+
+        viewModel.loadInitialUserInfo()
 
         // Наблюдение за изменениями данных пользователя
         viewModel.userLiveData.observe(viewLifecycleOwner) { user ->
@@ -46,6 +48,24 @@ class UserInfoFragment : Fragment() {
                     .into(binding.imgPhoto)
             }
         }
+
+        // вводим наблюдателя за состоянием STATE из viewmodel.
+        // в случае, если Fail - даём пользователю сообщение об ошибке
+        // таким образом мы перенесли показ сообщения из ViewModel во View,
+        // чтобы не передавать контекст в метод loadInitialUserInfo, так как
+        // передача контекст фрагмента во viewmodel чревата утечками памяти.
+        // Во вью модель можно безопасно передавать контекст приложения.
+        viewModel.state.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                State.Fail -> {
+                    Toast.makeText(requireContext(), "Ошибка в данных. Загрузка не удалась.", Toast.LENGTH_SHORT).show()
+                }
+                // и обработка других состояний, если понадобится
+                else -> {}
+            }
+        }
+
+
 
     }
 }
