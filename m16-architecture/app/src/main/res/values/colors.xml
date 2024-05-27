@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="rick_and_morty_default_color">#00FF00</color> <!-- Ярко-зеленый -->
+    <color name="rick_and_morty_second_color">#0000FF</color> <!-- Ярко-синий -->
+    <color name="text_background">#ABFFFFFF</color> <!-- Белый текст -->
 </resources>
