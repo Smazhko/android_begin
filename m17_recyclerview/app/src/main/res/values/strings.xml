@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Mars Photos</string>
+    <string name="txt_rover">Rover: </string>
+    <string name="txt_camera">Camera: </string>
+    <string name="txt_sol">Sol: </string>
+    <string name="txt_id">ID: </string>
+    <string name="txt_date">Data: </string>
+    <string name="btn_back">B A C K</string>
+</resources>
