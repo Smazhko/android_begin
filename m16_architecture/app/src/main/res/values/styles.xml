@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="RickAndMortyButton" parent="Widget.Material3.Button">
+        <item name="android:textColor">@color/rick_and_morty_second_color</item>
+        <item name="android:textSize">26sp</item>
+        <item name="strokeColor">@color/rick_and_morty_default_color</item>
+        <item name="strokeWidth">3dp</item>
+        <item name="backgroundTint">@color/white</item>
+    </style>
+</resources>
