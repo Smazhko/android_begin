@@ -42,7 +42,11 @@ class SinglePhotoFragment : Fragment() {
             // вы возвращаетесь к главному фрагменту без сохранения истории текущего фрагмента.
             parentFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
-
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
