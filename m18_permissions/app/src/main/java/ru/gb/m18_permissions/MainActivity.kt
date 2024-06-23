@@ -11,6 +11,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import ru.gb.m18_permissions.databinding.ActivityMainBinding
 import ru.gb.m18_permissions.viewmodel.PhotoViewModel
 
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         if (isGranted) {
             navigateToAddPhotoActivity()
         } else {
-            // Permission denied, show message to user
+            showPermissionDeniedMessage()
         }
     }
 
@@ -69,5 +70,13 @@ class MainActivity : AppCompatActivity() {
     private fun navigateToAddPhotoActivity() {
         val intent = Intent(this, AddPhotoActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun showPermissionDeniedMessage() {
+        Snackbar.make(binding.root, "Приложение не будет работать без разрешения на использование камеры.", Snackbar.LENGTH_LONG)
+            .setAction("Разрешить") {
+                requestPermissionLauncher.launch(Manifest.permission.CAMERA)
+            }
+            .show()
     }
 }
