@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">m18_permissions</string>
+    <string name="take_photo">Сделать фото</string>
+    <string name="add_photo">Добавить фото</string>
+</resources>
